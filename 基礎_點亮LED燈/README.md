@@ -25,7 +25,7 @@ R、G、B LED的陽極連接330 歐姆的電阻，與ESP32 MCU模組的 IO27、I
 ![alt text](images/image.png)
 
 點擊工具列中的"輸入輸出"展開-> 輸出、輸入、音率
-![alt text](images\image-1.png)
+![alt text](images/image-1.png)
 
 點擊工具列中的"輸出"後，出現可使電路板MCU腳位輸出的積木
 拖曳 所需積木到Arduino 程式積木中
@@ -56,7 +56,7 @@ R、G、B LED的陽極連接330 歐姆的電阻，與ESP32 MCU模組的 IO27、I
 ### 上傳紅色LED燈亮、滅閃爍的積木程式至Arduino IDE
 
 ![alt text](images/image-7.png)
-如上圖所示，滑鼠移動到上傳符號時，![alt text](images\image-8.png)，符號變成籃底，點擊後，即啟動Arduino IDE，並將原始碼同步上傳到Arduino IDE中。
+如上圖所示，滑鼠移動到上傳符號時，![alt text](images/image-8.png)，符號變成籃底，點擊後，即啟動Arduino IDE，並將原始碼同步上傳到Arduino IDE中。
 
 #### 無法啟動
 
