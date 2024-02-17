@@ -103,7 +103,7 @@ digitalWrite(27,false );
 delay(500);
 
 }
-
+</code></pre>
 當設定確後，點選![alt text](images/image-13.png)向右箭頭，Arduino IDE進行程式碼的編譯及上傳。
 
 ![alt text](images/image-14.png)
