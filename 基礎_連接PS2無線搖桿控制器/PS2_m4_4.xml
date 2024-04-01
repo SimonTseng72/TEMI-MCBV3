@@ -1,0 +1,2488 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id=";;G*-_Tq`6GB6FaC9Xc1" x="-250" y="-490">
+    <statement name="SETUP_FUNC">
+      <block type="ps2x_setup" id="V9d`cwqER1dOo%[!zfix">
+        <field name="Data">19</field>
+        <field name="Command">23</field>
+        <field name="Attention">5</field>
+        <field name="Clock">18</field>
+        <next>
+          <block type="DCMotor4_setup" id="*_WVpwbVIyJrNafUpDgV">
+            <field name="PWM_Phase">1</field>
+            <field name="PinR1A">17</field>
+            <field name="PinR1B">16</field>
+            <field name="PinL1A">15</field>
+            <field name="PinL1B">13</field>
+            <field name="PinR2A">4</field>
+            <field name="PinR2B">2</field>
+            <field name="PinL2A">12</field>
+            <field name="PinL2B">14</field>
+            <next>
+              <block type="serial_setup" id="z901(Z916mpPTNJr0gb9">
+                <field name="SERIAL_ID">Serial</field>
+                <field name="SPEED">500000</field>
+                <next>
+                  <block type="variables_set" id="%{Mv(LQM(yELOj3Dua_|">
+                    <field name="VAR">PWM</field>
+                    <value name="VALUE">
+                      <block type="variables_set_type" id="{C}K)896.,ob9E1u);{s">
+                        <field name="VARIABLE_SETTYPE_TYPE">BYTE</field>
+                        <value name="VARIABLE_SETTYPE_INPUT">
+                          <block type="math_number" id="u{Z;~:hg]El8Xr4}/ZYc">
+                            <field name="NUM">120</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="3^zO##2yn)jkP4N6}Pat">
+                        <field name="VAR">PWM_INC</field>
+                        <value name="VALUE">
+                          <block type="variables_set_type" id="c[U]6FShM+*sMyYpXJnt">
+                            <field name="VARIABLE_SETTYPE_TYPE">BYTE</field>
+                            <value name="VARIABLE_SETTYPE_INPUT">
+                              <block type="math_number" id="Y;G]TB8Fnuh54_-bild,">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="LOOP_FUNC">
+      <block type="ps2x_read_gamepad" id="rLG%sG]8AIpk^G{Hj-/=">
+        <next>
+          <block type="procedures_callnoreturn" id="F/8a#`8H|Ax(fFO@LJJC">
+            <mutation name="CheckPS2BtnChgPwmV"></mutation>
+            <next>
+              <block type="procedures_callnoreturn" id="`a*P9?SoZLqffZ:Q=mHP">
+                <mutation name="CheckPS2Btn"></mutation>
+                <next>
+                  <block type="time_delay" id="3Z~ICUCuo_DcvaFZgZ:%">
+                    <value name="DELAY_TIME_MILI">
+                      <block type="math_number" id="aB[6C%]G)f:r9)K;w{jH">
+                        <field name="NUM">16</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="xT544VB-*3f{N0Fd7mQ_" x="270" y="-490">
+    <mutation>
+      <arg name="PWM" vartype="byte"></arg>
+    </mutation>
+    <field name="NAME">CheckPS2BtnUp</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <statement name="STACK">
+      <block type="controls_if" id="Nl*|i(_aSW*gQW=_T%c|">
+        <mutation elseif="1" else="1"></mutation>
+        <value name="IF0">
+          <block type="ps2x_button" id="F6{?,nclSt|BQ59o(kp3">
+            <field name="PS2X_Button">PSB_CIRCLE</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="annotation_l" id="DZF!]Ea[0stG0cZsiE7y">
+            <value name="annotation">
+              <block type="text" id="Y|{_t%yf`,2tqeMeFUE}">
+                <field name="TEXT">UP+右右</field>
+              </block>
+            </value>
+            <next>
+              <block type="DCMotorpwm_function4S" id="tXfu]K32eVzx4PgoUuLX">
+                <field name="DCMotorChannel">R1</field>
+                <field name="DCMotorFunction">Stop</field>
+                <value name="PWM">
+                  <block type="variables_get" id="R2fo7U4#vGI@jWC~_eqa">
+                    <field name="VAR">PWM</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="DCMotorpwm_function4S" id="PG~n;?Rap]RL8+^0hS8v">
+                    <field name="DCMotorChannel">R2</field>
+                    <field name="DCMotorFunction">Reverse</field>
+                    <value name="PWM">
+                      <block type="variables_get" id="6]GZ1LWRT,bDqQ8M5:.;">
+                        <field name="VAR">PWM</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="g|_3/D=p-`Q`kw2q3/HH">
+                        <field name="DCMotorChannel">L1</field>
+                        <field name="DCMotorFunction">Forward</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="fdk)3w|1jQ2(CiaKQ7lD">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="9lCf^IzbG9VMFvgle:79">
+                            <field name="DCMotorChannel">L2</field>
+                            <field name="DCMotorFunction">Forward</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="TRJ1CE/YVf0,i13WwCs#">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="ps2x_button" id=":gEG-NkBeMS@:001b2EF">
+            <field name="PS2X_Button">PSB_SQUARE</field>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="annotation_l" id="BmTyB|m;JANV97zV8U7?">
+            <value name="annotation">
+              <block type="text" id="+Ck,TdYIS:L+0lbKo:g`">
+                <field name="TEXT">UP+右左</field>
+              </block>
+            </value>
+            <next>
+              <block type="DCMotorpwm_function4S" id="}{kwrONG=XHK:aiD:6y`">
+                <field name="DCMotorChannel">R1</field>
+                <field name="DCMotorFunction">Forward</field>
+                <value name="PWM">
+                  <block type="variables_get" id="a,Spi5/E`7W-zq/BfLrZ">
+                    <field name="VAR">PWM</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="DCMotorpwm_function4S" id="0!x3)lO)83!ukCeg`hKc">
+                    <field name="DCMotorChannel">R2</field>
+                    <field name="DCMotorFunction">Forward</field>
+                    <value name="PWM">
+                      <block type="variables_get" id="#tJK|i~qIc0{-4v{UO]|">
+                        <field name="VAR">PWM</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="B.9J[18W~y-^L#{0W}si">
+                        <field name="DCMotorChannel">L1</field>
+                        <field name="DCMotorFunction">Stop</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="q0anHv4}+]9=4DoOmWS!">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="N]Ouh7z_j^As|!pW}=jg">
+                            <field name="DCMotorChannel">L2</field>
+                            <field name="DCMotorFunction">Reverse</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="??|;Q|R6iY#:d%G1Yb-2">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="controls_if" id="AIDKDMBOf/JaUQEcEVsy">
+            <mutation elseif="1" else="1"></mutation>
+            <value name="IF0">
+              <block type="ps2x_button" id="f~GMGHQxu=*zNWQjFgKb">
+                <field name="PS2X_Button">PSB_PAD_LEFT</field>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="annotation_l" id=".0x1FDxh}EWj%@lva}4[">
+                <value name="annotation">
+                  <block type="text" id="sB.|?z4]Ib24|w(F0Je+">
+                    <field name="TEXT">135度</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="DCMotorpwm_function4S" id="(CvaiLwDZx]oK;pWBrsK">
+                    <field name="DCMotorChannel">R1</field>
+                    <field name="DCMotorFunction">Forward</field>
+                    <value name="PWM">
+                      <block type="variables_get" id="7r}d/WkmAy(o#T~C--)s">
+                        <field name="VAR">PWM</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="|;v;Z(6;~lRku,~Ck_J6">
+                        <field name="DCMotorChannel">R2</field>
+                        <field name="DCMotorFunction">Stop</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="U?vmGd~ZDdOF4j`My;I)">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="(Skgpzoc4r3!Nhek^SVo">
+                            <field name="DCMotorChannel">L1</field>
+                            <field name="DCMotorFunction">Stop</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="~xzw)bNdMLr)Nmx%1kz[">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="d.U6/h@k^C!6{Q6sLqB4">
+                                <field name="DCMotorChannel">L2</field>
+                                <field name="DCMotorFunction">Forward</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id=";poixaK:S^3xA`oVlyxZ">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <value name="IF1">
+              <block type="ps2x_button" id="~Xt;LQe,INbMXR`5t0Oc">
+                <field name="PS2X_Button">PSB_PAD_RIGHT</field>
+              </block>
+            </value>
+            <statement name="DO1">
+              <block type="annotation_l" id="06mZIEM(g!1SIi((QR+}">
+                <value name="annotation">
+                  <block type="text" id="HwKMcNLg6NI%~E7kc0Gp">
+                    <field name="TEXT">45度</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="DCMotorpwm_function4S" id="7Mpz;!JZ1?)e}}f:Yyz#">
+                    <field name="DCMotorChannel">R1</field>
+                    <field name="DCMotorFunction">Stop</field>
+                    <value name="PWM">
+                      <block type="variables_get" id="==f}u0tq:Q5`U)k,x||#">
+                        <field name="VAR">PWM</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="b}BP]_!!}k5uo/Vea3BE">
+                        <field name="DCMotorChannel">R2</field>
+                        <field name="DCMotorFunction">Forward</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="?%fv+`3vRh=aQ?DsAe|c">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="BGtywkA-~)#qm]+AO,_4">
+                            <field name="DCMotorChannel">L1</field>
+                            <field name="DCMotorFunction">Forward</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="5?xk3htyq`Gwg;xtg^xT">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="HS)cHl|66R]|QkK!QmSI">
+                                <field name="DCMotorChannel">L2</field>
+                                <field name="DCMotorFunction">Stop</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="OL9|:~#0*8Eq4]25ZeJ~">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="annotation_l" id=")TdYbE|6vg^V@SC`XsF4">
+                <value name="annotation">
+                  <block type="text" id="2SBDtV]YhIrK2mG7nZB[">
+                    <field name="TEXT">UP 前進</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="DCMotorpwm_function4S" id="R|SchjDni)i-n57OCP1f">
+                    <field name="DCMotorChannel">R1</field>
+                    <field name="DCMotorFunction">Forward</field>
+                    <value name="PWM">
+                      <block type="variables_get" id="YE=FfTZ#3!0OZV1{p9*K">
+                        <field name="VAR">PWM</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="W=|wA6`?q.^ZSk]Pi(!I">
+                        <field name="DCMotorChannel">R2</field>
+                        <field name="DCMotorFunction">Forward</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="Pk-6GieJnJ7^dxyU/:Fh">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="ro?XJo+GxZe:e{RDa1iH">
+                            <field name="DCMotorChannel">L1</field>
+                            <field name="DCMotorFunction">Forward</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="Lwz-p{oNl{?EbMpTAikt">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="Cg6|Iz9P:s63-pY~6:KW">
+                                <field name="DCMotorChannel">L2</field>
+                                <field name="DCMotorFunction">Forward</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="[RNbw*OyyV@]tmol`VpN">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="G!en6x2yl#(eY9qN-e|g" x="850" y="-490">
+    <mutation>
+      <arg name="PWM" vartype="byte"></arg>
+    </mutation>
+    <field name="NAME">CheckPS2BtnDown</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <statement name="STACK">
+      <block type="controls_if" id="!0O!;0`.TG?rpVS(uAi^">
+        <mutation elseif="1" else="1"></mutation>
+        <value name="IF0">
+          <block type="ps2x_button" id="}di}[Ex/elGoMG9h+BW/">
+            <field name="PS2X_Button">PSB_CIRCLE</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="annotation_l" id="[2~Xi{(]e1qdg80HkBPi">
+            <value name="annotation">
+              <block type="text" id="1^b2][X)_8O;dwMOszJX">
+                <field name="TEXT">Down+右右</field>
+              </block>
+            </value>
+            <next>
+              <block type="DCMotorpwm_function4S" id="`,*Y6D1D=MA85m)L(_Z/">
+                <field name="DCMotorChannel">R1</field>
+                <field name="DCMotorFunction">Forward</field>
+                <value name="PWM">
+                  <block type="variables_get" id="?`5}/O~}4@G7j,9sy[l-">
+                    <field name="VAR">PWM</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="DCMotorpwm_function4S" id="V-VX1gA)CAt}CH^^l)A=">
+                    <field name="DCMotorChannel">R2</field>
+                    <field name="DCMotorFunction">Stop</field>
+                    <value name="PWM">
+                      <block type="variables_get" id="eXl[)iH))F=adxdSZ0;9">
+                        <field name="VAR">PWM</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="YWPLItHk!2i@*P)@0q85">
+                        <field name="DCMotorChannel">L1</field>
+                        <field name="DCMotorFunction">Reverse</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="Nuia4j]`y-JiY)}=.{Wi">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="prC#L#.g_w?r]=V@(m^M">
+                            <field name="DCMotorChannel">L2</field>
+                            <field name="DCMotorFunction">Reverse</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="+6n@a8+gJs;a{8Bkp~G=">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="ps2x_button" id="O4Pv,3_aD1|m67?6!}1z">
+            <field name="PS2X_Button">PSB_SQUARE</field>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="annotation_l" id=",P?S`R6/**}{72QUbOWK">
+            <value name="annotation">
+              <block type="text" id="qz`=e*YEj8]+jf0#3^v`">
+                <field name="TEXT">Down+右左</field>
+              </block>
+            </value>
+            <next>
+              <block type="DCMotorpwm_function4S" id="1@ot@|7!.ohQBnw8qQFW">
+                <field name="DCMotorChannel">R1</field>
+                <field name="DCMotorFunction">Reverse</field>
+                <value name="PWM">
+                  <block type="variables_get" id="5|,M!lOyr1nLEcOn]2{t">
+                    <field name="VAR">PWM</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="DCMotorpwm_function4S" id="U-i-v]oN9)gOxaNIrcgx">
+                    <field name="DCMotorChannel">R2</field>
+                    <field name="DCMotorFunction">Reverse</field>
+                    <value name="PWM">
+                      <block type="variables_get" id="4sF:|/LV2q9a7@A6pkMZ">
+                        <field name="VAR">PWM</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="p/2U{C/K[}4)2|ovL;WH">
+                        <field name="DCMotorChannel">L1</field>
+                        <field name="DCMotorFunction">Forward</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="9}h4R2!;;u*GqKN8:72I">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="~snl|LzUczHW!^Mjw@`B">
+                            <field name="DCMotorChannel">L2</field>
+                            <field name="DCMotorFunction">Stop</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="vi-C7N%)BRw|k;dq?#`V">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="controls_if" id="b;[D6H|*#ewVU-lk.Y%9">
+            <mutation elseif="1" else="1"></mutation>
+            <value name="IF0">
+              <block type="ps2x_button" id="ig1#vg#7)#mpq_!%o@KT">
+                <field name="PS2X_Button">PSB_PAD_LEFT</field>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="annotation_l" id="KXa=hsMrQPdM!N=k[N_V">
+                <value name="annotation">
+                  <block type="text" id="vYU!,z=@I.*=tn-5tk%s">
+                    <field name="TEXT">225度</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="DCMotorpwm_function4S" id="Tj#x[n##xv@a{c21~7Ft">
+                    <field name="DCMotorChannel">R1</field>
+                    <field name="DCMotorFunction">Stop</field>
+                    <value name="PWM">
+                      <block type="variables_get" id="YSv`iCdX,[=pKfCq!AtK">
+                        <field name="VAR">PWM</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="jW;+%xgDdvW``x]6Ej[]">
+                        <field name="DCMotorChannel">R2</field>
+                        <field name="DCMotorFunction">Reverse</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="77Q`1,IJTXhjdlFsHJ8J">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="vA;n=KA,DYNhq.e~q7_(">
+                            <field name="DCMotorChannel">L1</field>
+                            <field name="DCMotorFunction">Reverse</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="8s9:^=;ZG(I]u6S!feph">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="onw|Ave3Kk|oOBk7`KkP">
+                                <field name="DCMotorChannel">L2</field>
+                                <field name="DCMotorFunction">Stop</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="-%Uttr_bZ`kGL{*n!3pq">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <value name="IF1">
+              <block type="ps2x_button" id=";ywRZz.moTwUD5[}4c)L">
+                <field name="PS2X_Button">PSB_PAD_RIGHT</field>
+              </block>
+            </value>
+            <statement name="DO1">
+              <block type="annotation_l" id=")mjUOe{DXO`UYns#Fz)8">
+                <value name="annotation">
+                  <block type="text" id="AB]Cz#W]*g=Svki*.FfA">
+                    <field name="TEXT">315度</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="DCMotorpwm_function4S" id="}2DLPV[gkXa^YZt%d=S;">
+                    <field name="DCMotorChannel">R1</field>
+                    <field name="DCMotorFunction">Reverse</field>
+                    <value name="PWM">
+                      <block type="variables_get" id="),lGO26nr):swm8BMdN[">
+                        <field name="VAR">PWM</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="^dN-G~9iWd^9o@vtZ=3i">
+                        <field name="DCMotorChannel">R2</field>
+                        <field name="DCMotorFunction">Stop</field>
+                        <value name="PWM">
+                          <block type="variables_get" id=":9JB+:_IDrIxV+f:Z=t(">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="{AiVnhUq#i]!]L8Prz:{">
+                            <field name="DCMotorChannel">L1</field>
+                            <field name="DCMotorFunction">Stop</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="=hWKko:_]8}v2lJP;^um">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="aE(8/V5;f6FLl]aoSuP)">
+                                <field name="DCMotorChannel">L2</field>
+                                <field name="DCMotorFunction">Reverse</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="A@UTV|K!=)NHx6p3[O7h">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="annotation_l" id="}Ed_j,jSx|EsKUyq]yHt">
+                <value name="annotation">
+                  <block type="text" id="~0VU+6^5gSEca]BdUyWV">
+                    <field name="TEXT">DOWN 後退</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="DCMotorpwm_function4S" id="{2_Sdek1G-%{g+*BvA3O">
+                    <field name="DCMotorChannel">R1</field>
+                    <field name="DCMotorFunction">Reverse</field>
+                    <value name="PWM">
+                      <block type="variables_get" id="Oe6`[s;iDwz*#p(-I%?s">
+                        <field name="VAR">PWM</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="NorvDs`TtEKT_WP*_a~c">
+                        <field name="DCMotorChannel">R2</field>
+                        <field name="DCMotorFunction">Reverse</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="U8Qhyn59Z@X8sa}Ab5:A">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="vA{^vzYhn^MRz=6pe0_s">
+                            <field name="DCMotorChannel">L1</field>
+                            <field name="DCMotorFunction">Reverse</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="{NlBe0]or93YYGfAzrc~">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="#m2r;pYcN/{u_oB:IHL}">
+                                <field name="DCMotorChannel">L2</field>
+                                <field name="DCMotorFunction">Reverse</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="b3)B)2b6h]l,0d^OI2I_">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id=":wbearhtQ5*/c?HJ6sH5" x="1410" y="-490">
+    <field name="NAME">CheckRXY</field>
+    <comment pinned="false" h="80" w="160">描述該功能...</comment>
+    <statement name="STACK">
+      <block type="controls_if" id="Xm.l-FzyF%6zAU0kjiRF">
+        <mutation elseif="1" else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="N|O0Gz)1vF+x:]?%bEB9">
+            <field name="OP">LTE</field>
+            <value name="A">
+              <block type="ps2x_Analog" id=".9vyd)cCw@U9iFfi4o(G">
+                <field name="PS2X_AnalogButton">PSS_RY</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="KgESpao.IsffSx7+0|`^">
+                <field name="NUM">50</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="annotation_l" id="H46zQhwAT1)@E-N):XoB">
+            <value name="annotation">
+              <block type="text" id=":hafKn5nD}21o9@}Lz~a">
+                <field name="TEXT">上部789</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="#HowcDAyTJ6U9@zA6noa">
+                <mutation elseif="1" else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare" id="Z_8l9q)_761F]j1bayEJ">
+                    <field name="OP">LTE</field>
+                    <value name="A">
+                      <block type="ps2x_Analog" id="5Z.I59oKgbzTX%H5e#Xn">
+                        <field name="PS2X_AnalogButton">PSS_RX</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="}|BDVx5W61x%kDZM}!qZ">
+                        <field name="NUM">50</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="annotation_l" id="U.Edmd.5ZEcm~@H%,q^b">
+                    <value name="annotation">
+                      <block type="text" id="B4M.JWOW0pFYRnZuK/VI">
+                        <field name="TEXT">左部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="Q*J3i`Rk6o?Ay2={pSfz">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Forward</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="O1Li=(83u9-}FvopW-W!">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="yoc-~Z|h1vteX(.7-;/?">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Forward</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="]?x*2e1_)E2v~/%?(##V">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="0voW2Ei#dbNN0,lt#[qu">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Reverse</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="wRD3yul(+u%3x-b7J%4e">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id="l+(05+)T!+l/@^,2zC.U">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Stop</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id="3xKo(b57RwqY?%h]W)5?">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <value name="IF1">
+                  <block type="logic_compare" id="N-zeoxWU!^V6K!_C8oyG">
+                    <field name="OP">GTE</field>
+                    <value name="A">
+                      <block type="ps2x_Analog" id="mRa8l;4?8j.3|ka`7rzq">
+                        <field name="PS2X_AnalogButton">PSS_RX</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="m*~UPgywBsG6`F?KoI)s">
+                        <field name="NUM">200</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO1">
+                  <block type="annotation_l" id="^tMlX?8(}tHV2Va.o5uJ">
+                    <value name="annotation">
+                      <block type="text" id="iD!Gh~!a=Aei_5Q6?WuM">
+                        <field name="TEXT">右部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="F1K^)#]rL^J8Y+]!mmfp">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Reverse</field>
+                        <value name="PWM">
+                          <block type="variables_get" id=".@idykSxCUZBZ@pKA{;+">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="k])3;TO%dWu[v=U,^oc9">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Stop</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="0u#M|;^8?l:B}}w4#*0L">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="1WbYC,=lUlWcGs4KHLMF">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Forward</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="-pMD*.]ogPBrvYq57_Vx">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id="yn%;_%wX_.l}B?)/sg(X">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Forward</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id="*_uRW3:YVj7P6fHy4%1%">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="annotation_l" id="iUYH(^AfDr3}7@hE|.q;">
+                    <value name="annotation">
+                      <block type="text" id="EJzdF2QJXEIx#f?=!=rj">
+                        <field name="TEXT">中部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="l0E1d7)ZxJiOhsIYl68Q">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Forward</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="!w?##T`reCuwWGRbWLg#">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="L.)s1rONT1KYda.j_,_F">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Forward</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="hp7|W#V#.W4NQ;q6LyMS">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="w8%4Cn-o0aBfW6BZYtin">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Forward</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="r,3c.^L*.2zV*qS2E=n:">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id="ue8w:e()y]N*(qw0Z?m3">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Forward</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id="=]13kFD8fS[Q5R#Pecz)">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="logic_compare" id="(71{uwy#Xon4|LjQdm?Z">
+            <field name="OP">GTE</field>
+            <value name="A">
+              <block type="ps2x_Analog" id="s1sgNio;ilBbN})@J7C#">
+                <field name="PS2X_AnalogButton">PSS_RY</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="@1pw2U|46l2|_@*zeBRs">
+                <field name="NUM">200</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="annotation_l" id="Eje..B?8n@~o?mK]`pHK">
+            <value name="annotation">
+              <block type="text" id="Tg^d*t~eJ;M#VI#9R*9q">
+                <field name="TEXT">下部123</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="P5;,Q_5B*k@zB223-w=E">
+                <mutation elseif="1" else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare" id="coR(j~oROvXrpokZ?aA;">
+                    <field name="OP">LTE</field>
+                    <value name="A">
+                      <block type="ps2x_Analog" id="no6KE}Qu5!+UgGH:siAC">
+                        <field name="PS2X_AnalogButton">PSS_RX</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="GiJ|KADQRU_+Udd0_=dy">
+                        <field name="NUM">50</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="annotation_l" id="@TIsBE[z]8YK/n]!+C(q">
+                    <value name="annotation">
+                      <block type="text" id="pmFd;a-2@-b1U!MGi(Mm">
+                        <field name="TEXT">左部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="KsyX|*Ts3RIabpfD.#6!">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Reverse</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="id9Bx`v,1PpBlX-uE(9|">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="}jdAw[j2-u_|-H%_})d#">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Reverse</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="N#H5I!VErwufMytB/cy^">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="J];.FmI]^owCvQhwWzVb">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Stop</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="LZJLpk(-h6%(ZG`q#0/%">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id="J5/XUcmeJVJT=1oJC(_f">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Forward</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id="5evSx|?bQYGm*c})]1ZM">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <value name="IF1">
+                  <block type="logic_compare" id="8yDv2Kuh.M{{2JRIQ?27">
+                    <field name="OP">GTE</field>
+                    <value name="A">
+                      <block type="ps2x_Analog" id="M?d~%z[O20O3(|-|ebxm">
+                        <field name="PS2X_AnalogButton">PSS_RX</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="6L|f8J5_0PCT-1R{Tr+G">
+                        <field name="NUM">200</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO1">
+                  <block type="annotation_l" id="K+*NfwpzqAtwvx=Rl=|V">
+                    <value name="annotation">
+                      <block type="text" id=".41]G%I/7DFQA1|6J^li">
+                        <field name="TEXT">右部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="^*Y|{6`_V8ex#a|A{cqN">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Stop</field>
+                        <value name="PWM">
+                          <block type="variables_get" id=".a:mME0`KocCB5g8?=cg">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="-nm,*BAlAOW{(/YpF3_=">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Forward</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="f4fyyn,|)3Yagi:Bo.)B">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="StCZ/u+ac}1oy0-7Xw4I">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Reverse</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="._|hpW~-637FXOD5H%HH">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id="N`[=/bF}yDq@0Oa7Elxn">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Reverse</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id="TQg!HM1zv-OP-2p:?1cm">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="annotation_l" id="TNsT3=nb@ANczB~#6mO)">
+                    <value name="annotation">
+                      <block type="text" id="7P6h?6k)X}EIy?cIA*F0">
+                        <field name="TEXT">中部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="e.8cmJSQ:9q?d~E[,u+r">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Reverse</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="|S)Xh/.h!c?}eb5Q)@(9">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="D*TsjiAg3lG}S=iap-kw">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Reverse</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="BaE{fV0T/kHDy;9i4,Fr">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="3+#tC7b?1sQ[hurwv_j@">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Reverse</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="yzou:GBb(JN`#m89-Z/(">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id="EeN:juxEepIos~WjuatQ">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Reverse</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id="U2XkQIg)ey+H|RJbc!Ze">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="annotation_l" id="!b:!6]WO`.8q,pUR0s9V">
+            <value name="annotation">
+              <block type="text" id="Gn+ca(jMsCfS0x9vEO)r">
+                <field name="TEXT">中部456</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id=",E5*NyP-szvROW{Z+xbP">
+                <mutation elseif="1" else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare" id="a{)}D`gK6E)+Naa;e9@w">
+                    <field name="OP">LTE</field>
+                    <value name="A">
+                      <block type="ps2x_Analog" id="eIEQy:wS7mUEjK3]d#lo">
+                        <field name="PS2X_AnalogButton">PSS_RX</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="aueFF?)DLM[F@H+[fS{v">
+                        <field name="NUM">50</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="annotation_l" id="+o6T0o=mUO*1u]?L@RyC">
+                    <value name="annotation">
+                      <block type="text" id="or@-ufTl@#;m=-tp1CcK">
+                        <field name="TEXT">左部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="Tn^98WnTC`y9`lKLlxEK">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Forward</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="V0qSqK)gur?5@PPdJqwb">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="/?jEN(O2^mHT[IqT#9ea">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Forward</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="%kq-fRp7)Z~x0A}X3|RK">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="u36RC[_h.)ZJ6}}awoMA">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Reverse</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="R6{Ai@FRyNpwTkbvZSI}">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id="f^|wX{s|q@)XBrK,D`{q">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Reverse</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id="%MG]O6ny^D@A8J2k+-EA">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <value name="IF1">
+                  <block type="logic_compare" id="=dwwtg);sp|fW3+t:iBF">
+                    <field name="OP">GTE</field>
+                    <value name="A">
+                      <block type="ps2x_Analog" id="-0;xQwZ?c?#dFp6l*lM9">
+                        <field name="PS2X_AnalogButton">PSS_RX</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="V/MXkqJfO;UPX-IXMg1#">
+                        <field name="NUM">200</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO1">
+                  <block type="annotation_l" id="!0XGaw1(9drp#1}|!HVP">
+                    <value name="annotation">
+                      <block type="text" id="KI/SaU}wQm/.%#D,E?n+">
+                        <field name="TEXT">右部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="d@Hei2beDYZuMe@;?88p">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Reverse</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="`Rrvz=zJAVn%n~vp9[#e">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="U.13S;g-2.eAbcCtJU4E">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Reverse</field>
+                            <value name="PWM">
+                              <block type="variables_get" id=",|t`D8_?o0V@Hl3DUZo@">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id=":Q=Juu4F_{,I}7w=4aEd">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Forward</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="E-iY|RW#^b_/uw?nmgsG">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id=".SX`99F?EFXsKT;pU}A#">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Forward</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id="GH1xox|q.N~w8urJ]Cb5">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="annotation_l" id="2xa:%yvhJS~|{woMOpZt">
+                    <value name="annotation">
+                      <block type="text" id="!e8y1,6CXMg49n![!j6*">
+                        <field name="TEXT">中部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="procedures_callnoreturn" id="6qgWr2#qyAlCa[q{mOeZ">
+                        <mutation name="CheckLXY"></mutation>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="gHAePm@o.XHv={FoSi?r" x="1990" y="-490">
+    <field name="NAME">CheckLXY</field>
+    <comment pinned="false" h="80" w="160">描述該功能...</comment>
+    <statement name="STACK">
+      <block type="controls_if" id="Ad)V@yccz8RzPXDqUY*,">
+        <mutation elseif="1" else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="cU!UCCYe,E_2wd3Z?H2A">
+            <field name="OP">LTE</field>
+            <value name="A">
+              <block type="ps2x_Analog" id="AW?Pd/_,da|Kj[(AJqkO">
+                <field name="PS2X_AnalogButton">PSS_LY</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="v1**N;i8p^|ui.Q@vVpu">
+                <field name="NUM">50</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="annotation_l" id="3MoFKeAy)~/4+{avsgVI">
+            <value name="annotation">
+              <block type="text" id="|RM_iA8d+Iv=jN~ot*Bg">
+                <field name="TEXT">上部789</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="Tq6ctyNPwG(^;^*Hnt]l">
+                <mutation elseif="1" else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare" id="rU}!CbH}d*x)bfGr]=)k">
+                    <field name="OP">LTE</field>
+                    <value name="A">
+                      <block type="ps2x_Analog" id="k~]nVPRTm3p!5:FO0s%F">
+                        <field name="PS2X_AnalogButton">PSS_LX</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="4aA4A7Z:/CQIi6MH)lTR">
+                        <field name="NUM">50</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="annotation_l" id="nbqu`?B:}Hh8AmzGqBGh">
+                    <value name="annotation">
+                      <block type="text" id="B{47u4bt+q1y6;#%n9#G">
+                        <field name="TEXT">左部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="ChMzY21Av:n4*8Nqb]-n">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Forward</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="_L-%@6RAeb1PU`+2#=6S">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="xw1N;N9MM0e6aRlYZ?m`">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Stop</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="*MXQJnZUb:LY8O?`E4=E">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="Y=`u=TngmUd6r%@bikxQ">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Stop</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="qw?f:_Ia%WnlCYS{zqL?">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id="FyzO)0IW?i2*bvUrEftA">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Forward</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id=";8j,2SaD(B^@`l^794}D">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <value name="IF1">
+                  <block type="logic_compare" id="1TF9y.ZCWHy6Tdx3py3~">
+                    <field name="OP">GTE</field>
+                    <value name="A">
+                      <block type="ps2x_Analog" id="SX5}n,(Y]vtY=_A)`.xM">
+                        <field name="PS2X_AnalogButton">PSS_LX</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="8pO1ghu:yE*V5_^{ys3)">
+                        <field name="NUM">200</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO1">
+                  <block type="annotation_l" id="|%c8MF+/Z*]m8yI:W]{n">
+                    <value name="annotation">
+                      <block type="text" id="FUZcQkD!!CsU0;D8bI.Z">
+                        <field name="TEXT">右部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="}MoowA:c@o=/3toZL60N">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Stop</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="lCeeU87{Q/v=6dJn%WFe">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="Un]5TB|r{k[3y*p-~VDP">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Forward</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="IBbt/JLnDNi-%=ESw}8e">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id=",el:oHm7l;r%R_9eCX4I">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Forward</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="6RrzV,/D|!`ixeKWEdc3">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id="KjbaB_-GM10Xz0AS^Q41">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Stop</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id="QR.bCg]=S.5.+Px..8rM">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="annotation_l" id="(cNn@peF_C-,r#H~StLN">
+                    <value name="annotation">
+                      <block type="text" id="w}bkk1Sz_k2?(fXuz`a|">
+                        <field name="TEXT">中部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="Wk1p9~*p8RIULfSpDL*g">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Forward</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="-*Hj!mkU1;H/1aDOrJ!K">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="A~z7;ahqC7:9nVTG[DYe">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Forward</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="9IDP9a:.XVST{iuGiEZn">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id=";~G%VXD;_f/60L|nNfq!">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Forward</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="#1CgC%r?NK^]Kml=LZ6E">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id="VSa,Lf1E%zVW`Kl{,{NA">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Forward</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id="Oz)X+F=o#Wg%#R+I]pA?">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="logic_compare" id="`Rk%byk0Qd4oDP|hfUlk">
+            <field name="OP">GTE</field>
+            <value name="A">
+              <block type="ps2x_Analog" id="RY|5^8EXoT@=S3B/K[2P">
+                <field name="PS2X_AnalogButton">PSS_LY</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="pFTRD!4xDMA]AQDd)R:A">
+                <field name="NUM">200</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="annotation_l" id="e4x1s}x5lx;gaIISHp{y">
+            <value name="annotation">
+              <block type="text" id="a|]hzp%(6Fl~I_1P]=F@">
+                <field name="TEXT">下部123</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="rYq/^lgJ;8/`xEXU/^@l">
+                <mutation elseif="1" else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare" id="|a-e_kW3HCnIUp=S1VDU">
+                    <field name="OP">LTE</field>
+                    <value name="A">
+                      <block type="ps2x_Analog" id="W(Hv/{L6ab58h#iFYD;#">
+                        <field name="PS2X_AnalogButton">PSS_LX</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="N5Dmoq_0cb_!D86@g#Dt">
+                        <field name="NUM">50</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="annotation_l" id="#5xL}[tc*,wk4hui6gMP">
+                    <value name="annotation">
+                      <block type="text" id="rm?:@qO/jiYC`QDZSV}~">
+                        <field name="TEXT">左部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="U{h,aF=YG/_9.BaqK*i5">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Stop</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="{%`GO-w@1:63jBSmQ%i]">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="j|G90la4%*egN77nG=o_">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Reverse</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="~r%6V=J0Nvr/QP^H%b:5">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="57y@pxMZ,L0@AX#T}g|R">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Reverse</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="{RVkv0*Or^;cm]m6^VrY">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id="}L)uJO.(9ZVr=8:j.Yz;">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Stop</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id="!A0Uq%tPksBL!{{(G:Qx">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <value name="IF1">
+                  <block type="logic_compare" id="vlxrw)?j+XeQCo?m%WPN">
+                    <field name="OP">GTE</field>
+                    <value name="A">
+                      <block type="ps2x_Analog" id="PCyzG_b+|0p0~8J7q*In">
+                        <field name="PS2X_AnalogButton">PSS_LX</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="Ot!Q7JP4RSA6dI8JQZ0)">
+                        <field name="NUM">200</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO1">
+                  <block type="annotation_l" id="]bK[Gyc|rug+@fIzKE:2">
+                    <value name="annotation">
+                      <block type="text" id="n{@[jOfmg*3G)fqNbHZ.">
+                        <field name="TEXT">右部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="L*,0Q7v,TPKA(;ngZ0zR">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Reverse</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="UgPf?1W69;}ofxt]p6fM">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="bQi3d_o}cIygL;[R4N9G">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Stop</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="jb8NJlO/y#)ARWxR=@o5">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="ek60X:S1@]3LlQ38F,k0">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Stop</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="y]O(`3!!MuVj)J-|PaHs">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id=".*^vQ}RekbtQ:,{U%))k">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Reverse</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id="|6fka1AR9HM55g!Ir@RE">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="annotation_l" id="7g/,e=ylW9c%V_Aj^Q~r">
+                    <value name="annotation">
+                      <block type="text" id="ef7j}Wv/n[_PF2p1zLg5">
+                        <field name="TEXT">中部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="N.(D31fitVrku6p/hN`5">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Reverse</field>
+                        <value name="PWM">
+                          <block type="variables_get" id=").C-B6}m|@FTr/~_B|?H">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="yOm[q.vdLT~/bxSJ%lR2">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Reverse</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="]Z0xN2bxs}*l]k(`0x9I">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="8kiWgE7%BY.FMzR:xw.a">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Reverse</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="x)F(~PD0?t_:9;Ek%[kL">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id="dFSsN,Jo7(9X2gn)2`@c">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Reverse</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id="a6?!)bZ-Vt]k[:m-S-;X">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="annotation_l" id="6(BZHy,Y+D7wNu0,:oRp">
+            <value name="annotation">
+              <block type="text" id=".)*zmOe_VVK{Kny.%2-[">
+                <field name="TEXT">中部456</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="l=%{ws5}`=RK2fY5O_[9">
+                <mutation elseif="1" else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare" id="HtErwIoD5IlQ~D[6i+g%">
+                    <field name="OP">LTE</field>
+                    <value name="A">
+                      <block type="ps2x_Analog" id=",*u=4Zxz#}CtzR0vW@[,">
+                        <field name="PS2X_AnalogButton">PSS_LX</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="oLd{`/IeBj{Et0Gy`@:G">
+                        <field name="NUM">50</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="annotation_l" id="mbbMj(0AoRZzem}i?M-g">
+                    <value name="annotation">
+                      <block type="text" id="GvYkS=N,a1n_vMaJU2[{">
+                        <field name="TEXT">左部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="ad?W}6!KAUtzj2KsHM|X">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Forward</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="%McW9.ir|]J:O5th)gMZ">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="1A?LQcIFH.kTSao59#(_">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Reverse</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="l(Hma8YJp0U5J!LDiAx#">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="gnxN@E|tV;}ALqA-4*Rn">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Reverse</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="p|*W[P8^5`498s;JNY*0">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id="H)HChj8(p~jm]]Av1u!@">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Forward</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id="9}j+ln2*|@{ibk,1Tdg|">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <value name="IF1">
+                  <block type="logic_compare" id="TqLo:EX0{}~0!7%3CQ^`">
+                    <field name="OP">GTE</field>
+                    <value name="A">
+                      <block type="ps2x_Analog" id="az[bd9fDvS^zi+_7)WP,">
+                        <field name="PS2X_AnalogButton">PSS_LX</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="^.[+wwW@f%Nz}2v}RY=D">
+                        <field name="NUM">200</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO1">
+                  <block type="annotation_l" id="lgG}e|YMn!WiJQO(Na^i">
+                    <value name="annotation">
+                      <block type="text" id="Y(ZcY?.l#rU;VpaY3LG4">
+                        <field name="TEXT">右部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="{NtM|,O#Nb30za:?bnYX">
+                        <field name="DCMotorChannel">R1</field>
+                        <field name="DCMotorFunction">Reverse</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="1#U4YvSK{Z|Jg`*D;ROh">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="0F)zmVHg]h@XUf7++6YV">
+                            <field name="DCMotorChannel">R2</field>
+                            <field name="DCMotorFunction">Forward</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="#,S%d,Szs95w.x7~dlw]">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="DCMotorpwm_function4S" id="*^8}@Jyi%V9c90kNVi_R">
+                                <field name="DCMotorChannel">L1</field>
+                                <field name="DCMotorFunction">Forward</field>
+                                <value name="PWM">
+                                  <block type="variables_get" id="hWQ+Td~s[=d2XZ}/h/]j">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="DCMotorpwm_function4S" id="xawYk1qh1o*=3|c5nLNy">
+                                    <field name="DCMotorChannel">L2</field>
+                                    <field name="DCMotorFunction">Reverse</field>
+                                    <value name="PWM">
+                                      <block type="variables_get" id="s-;fmbX=?qi7g]T}W%H2">
+                                        <field name="VAR">PWM</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="annotation_l" id=";icIn?!m^s^Du?cY]u3(">
+                    <value name="annotation">
+                      <block type="text" id="-!a0n7A49le%c,2]j@vX">
+                        <field name="TEXT">中部</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function" id="5P/?HFN#kPp}fQ~{%9V!">
+                        <field name="DCMotorFunction">Stop</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="BtSPqiF:`^jCsI|9ngF]">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="=~**aAJd-IF.IP]`A29}" x="-250" y="30">
+    <field name="NAME">CheckPS2BtnChgPwmV</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <statement name="STACK">
+      <block type="controls_if" id="@r?Y@l59[uxO7~x;)kw[">
+        <mutation elseif="3"></mutation>
+        <value name="IF0">
+          <block type="ps2x_button" id="5Vu^XDiS)S3q0kW}cmyK">
+            <field name="PS2X_Button">PSB_R1</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set" id="QFZGt_On3}/Gva207*sv">
+            <field name="VAR">PWM</field>
+            <value name="VALUE">
+              <block type="math_number" id="aFW,gj;of3L/a~a^ehyx">
+                <field name="NUM">190</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="ps2x_button" id="4wUQ|0LkhkmMv-4dwiX/">
+            <field name="PS2X_Button">PSB_R2</field>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="variables_set" id="ni%dU,/Kc:cCdYtBqgsi">
+            <field name="VAR">PWM</field>
+            <value name="VALUE">
+              <block type="math_number" id="pqi!KFhCs9nBj*TzDqzZ">
+                <field name="NUM">165</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF2">
+          <block type="ps2x_button" id="#oX{W)dq{I(xX%O2z^u=">
+            <field name="PS2X_Button">PSB_L1</field>
+          </block>
+        </value>
+        <statement name="DO2">
+          <block type="variables_set" id=")96eS`7`8DX2%2~W,WB2">
+            <field name="VAR">PWM</field>
+            <value name="VALUE">
+              <block type="math_number" id="kAi`-]f_NQ3v3-6GmDZj">
+                <field name="NUM">150</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF3">
+          <block type="ps2x_button" id="9gL;bWsqs:[tk]733UH,">
+            <field name="PS2X_Button">PSB_L2</field>
+          </block>
+        </value>
+        <statement name="DO3">
+          <block type="variables_set" id="U^VxBEda?.?V7fBdxCPc">
+            <field name="VAR">PWM</field>
+            <value name="VALUE">
+              <block type="math_number" id="BqVmK4gr0-b[|alwGr^4">
+                <field name="NUM">120</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="++]A,U,I`6BuZGvl1;Bs" x="-250" y="330">
+    <field name="NAME">CheckPS2Btn</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <statement name="STACK">
+      <block type="controls_if" id="(;eWJ;F08d]rtz{g82J4">
+        <mutation elseif="5" else="1"></mutation>
+        <value name="IF0">
+          <block type="ps2x_button" id="CKQ;o}Dot~h53Y7awt7^">
+            <field name="PS2X_Button">PSB_PAD_UP</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="procedures_callnoreturn" id="f]II@}Z}?w4trxK/@,NX" inline="true">
+            <mutation name="CheckPS2BtnUp">
+              <arg name="PWM"></arg>
+            </mutation>
+            <value name="ARG0">
+              <block type="variables_get" id="tjbtb?!ZSWV7v++Tf0xK">
+                <field name="VAR">PWM</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="ps2x_button" id="P=A1!oZUr(g%jX4/yal}">
+            <field name="PS2X_Button">PSB_PAD_DOWN</field>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="procedures_callnoreturn" id="?P9Gp0+B|/@zPIEd@tPa" inline="true">
+            <mutation name="CheckPS2BtnDown">
+              <arg name="PWM"></arg>
+            </mutation>
+            <value name="ARG0">
+              <block type="variables_get" id="Q5i1,AIv^vIBzXQh5qHP">
+                <field name="VAR">PWM</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF2">
+          <block type="ps2x_button" id="lCWI129Gd+#M!DD8s#,I">
+            <field name="PS2X_Button">PSB_PAD_LEFT</field>
+          </block>
+        </value>
+        <statement name="DO2">
+          <block type="annotation_l" id="rA.8-efr|.0-*=o2bV1{">
+            <value name="annotation">
+              <block type="text" id="U2R!qDy9o.R5#A[ITt);">
+                <field name="TEXT">Left 左移</field>
+              </block>
+            </value>
+            <next>
+              <block type="DCMotorpwm_function4S" id="6dtUOckmE6mnuQ=vfC+/">
+                <field name="DCMotorChannel">R1</field>
+                <field name="DCMotorFunction">Forward</field>
+                <value name="PWM">
+                  <block type="variables_get" id="bIPOr=B%@trzHaO3;0c;">
+                    <field name="VAR">PWM</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="DCMotorpwm_function4S" id="X!nDKgnc,U8pv_(`^VD.">
+                    <field name="DCMotorChannel">R2</field>
+                    <field name="DCMotorFunction">Reverse</field>
+                    <value name="PWM">
+                      <block type="variables_get" id="zvw4]7.3bIE.vhW,I.qz">
+                        <field name="VAR">PWM</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="DxGMkrU3/@ntNlcr*Wt)">
+                        <field name="DCMotorChannel">L1</field>
+                        <field name="DCMotorFunction">Reverse</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="q~?%OBHNswXgK@72lr?F">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="E@zImA|=d?J;fSfh2APY">
+                            <field name="DCMotorChannel">L2</field>
+                            <field name="DCMotorFunction">Forward</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="H=`5a!m6FW6UsZ_,D]x.">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="IF3">
+          <block type="ps2x_button" id="Wf,M93eKId[~3K#L~n/n">
+            <field name="PS2X_Button">PSB_PAD_RIGHT</field>
+          </block>
+        </value>
+        <statement name="DO3">
+          <block type="annotation_l" id="a|p2jIpT7c=b)fwO{C-S">
+            <value name="annotation">
+              <block type="text" id="Ooz5!LM:1,eC]}bdb|rv">
+                <field name="TEXT">Right 右移</field>
+              </block>
+            </value>
+            <next>
+              <block type="DCMotorpwm_function4S" id="oiX}HEvyqwfzc|sEoGKw">
+                <field name="DCMotorChannel">R1</field>
+                <field name="DCMotorFunction">Reverse</field>
+                <value name="PWM">
+                  <block type="variables_get" id="{MvyxKL;E1gCEf/DV[:V">
+                    <field name="VAR">PWM</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="DCMotorpwm_function4S" id="dMgM,KxBf|s@/%:K1)2j">
+                    <field name="DCMotorChannel">R2</field>
+                    <field name="DCMotorFunction">Forward</field>
+                    <value name="PWM">
+                      <block type="variables_get" id="~g1iC/ir-u%7{biixdM%">
+                        <field name="VAR">PWM</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="2uheEZ(xCAN7S%P9fz/j">
+                        <field name="DCMotorChannel">L1</field>
+                        <field name="DCMotorFunction">Forward</field>
+                        <value name="PWM">
+                          <block type="variables_get" id="m!uKF=Wrw)Ebmo!d4f^8">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="f-XGI[F,gO0)~5E:_XsM">
+                            <field name="DCMotorChannel">L2</field>
+                            <field name="DCMotorFunction">Reverse</field>
+                            <value name="PWM">
+                              <block type="variables_get" id="*s{+GUR_BYx:bwZp{ZW3">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="IF4">
+          <block type="ps2x_button" id="yaTNFz}p1l-.~6.xmq{W">
+            <field name="PS2X_Button">PSB_CIRCLE</field>
+          </block>
+        </value>
+        <statement name="DO4">
+          <block type="annotation_l" id="JFGIrlag=DH%jCXLx4Y%">
+            <value name="annotation">
+              <block type="text" id="HLW/cVd)-AX{9@!g.Tj}">
+                <field name="TEXT">Right+右右,右旋</field>
+              </block>
+            </value>
+            <next>
+              <block type="DCMotorpwm_function4S" id="7L|C%z(`;jWhRd_hH*cu">
+                <field name="DCMotorChannel">R1</field>
+                <field name="DCMotorFunction">Reverse</field>
+                <value name="PWM">
+                  <block type="ops_arithmetic" id="7i0i+Ot!x}I0wB)JXC2Y">
+                    <field name="OP">ADD</field>
+                    <value name="A">
+                      <block type="variables_get" id="3|Sbi9-+B[x32~0R,LJu">
+                        <field name="VAR">PWM</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="ops_arithmetic" id="Q)vo]#{bl5TtJ@0g_pl9">
+                        <field name="OP">BITWISE_RIGHT</field>
+                        <value name="A">
+                          <block type="variables_get" id="_Mjp[)T?86-r/fVNH?H{">
+                            <field name="VAR">PWM_INC</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="cnflVz@1:!E/x}(!Lu0)">
+                            <field name="NUM">2</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="DCMotorpwm_function4S" id="VXJ;zRo%vdz.Z:m]2Wq(">
+                    <field name="DCMotorChannel">R2</field>
+                    <field name="DCMotorFunction">Reverse</field>
+                    <value name="PWM">
+                      <block type="ops_arithmetic" id="R92M~pi~_83}FiO:yQnX">
+                        <field name="OP">ADD</field>
+                        <value name="A">
+                          <block type="variables_get" id="Z782Lp?BFn8fd)%NJmF[">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="ops_arithmetic" id="*5wCJ-~80vf-j?P/R3M0">
+                            <field name="OP">BITWISE_RIGHT</field>
+                            <value name="A">
+                              <block type="variables_get" id="/}yzO5St5ek1bAnPJsLU">
+                                <field name="VAR">PWM_INC</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="J,A*hZ0Usuk,d{#GryZm">
+                                <field name="NUM">2</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="I7ko!cXDk8?rp8HdnzKi">
+                        <field name="DCMotorChannel">L1</field>
+                        <field name="DCMotorFunction">Forward</field>
+                        <value name="PWM">
+                          <block type="ops_arithmetic" id="6nRM:`+v#~DMB_/5rVTu">
+                            <field name="OP">ADD</field>
+                            <value name="A">
+                              <block type="variables_get" id="e_QMP{OGWjbet`Z:q?~0">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="ops_arithmetic" id="sSwBZb.-:zt`=D3!g,nL">
+                                <field name="OP">BITWISE_RIGHT</field>
+                                <value name="A">
+                                  <block type="variables_get" id=";X=ukW]}1u1z;7?!r0Xq">
+                                    <field name="VAR">PWM_INC</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="PbfBkO5wvxYi_jApp2nb">
+                                    <field name="NUM">2</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="Q`(Ei43uJr}k)x6Axxh?">
+                            <field name="DCMotorChannel">L2</field>
+                            <field name="DCMotorFunction">Forward</field>
+                            <value name="PWM">
+                              <block type="ops_arithmetic" id="NZ@PKK}4_YLkj6{QRpX+">
+                                <field name="OP">ADD</field>
+                                <value name="A">
+                                  <block type="variables_get" id="R.Bp=JkQN3qCjW/SVziH">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="ops_arithmetic" id="KHBayY+~94[6LAD]hT[p">
+                                    <field name="OP">BITWISE_RIGHT</field>
+                                    <value name="A">
+                                      <block type="variables_get" id="m)[,X(+8fCw2-{%}J--D">
+                                        <field name="VAR">PWM_INC</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id="V2g(B/w]exP2h!5z^n!3">
+                                        <field name="NUM">2</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="procedures_callnoreturn" id="=!F*z,Q[TBWJ[U]}%d!X">
+                                <mutation name="fPWM_INC"></mutation>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="IF5">
+          <block type="ps2x_button" id="y?=2(4CPWr.eDJU[}||w">
+            <field name="PS2X_Button">PSB_SQUARE</field>
+          </block>
+        </value>
+        <statement name="DO5">
+          <block type="annotation_l" id="0cxY)T-!WueF^]Nvgt2+">
+            <value name="annotation">
+              <block type="text" id="{s~NKVsqkK9moJhp2@x,">
+                <field name="TEXT">Left+右左 , 左旋</field>
+              </block>
+            </value>
+            <next>
+              <block type="DCMotorpwm_function4S" id="^.Od5`?]a7K87l]4LDfp">
+                <field name="DCMotorChannel">R1</field>
+                <field name="DCMotorFunction">Forward</field>
+                <value name="PWM">
+                  <block type="ops_arithmetic" id="vT~+9qHkL}uWlM.f]@Ui">
+                    <field name="OP">ADD</field>
+                    <value name="A">
+                      <block type="variables_get" id="n3]WHR}]`(an2PTh~|:D">
+                        <field name="VAR">PWM</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="ops_arithmetic" id="4^!1]J:s[/3yKC,=7u1b">
+                        <field name="OP">BITWISE_RIGHT</field>
+                        <value name="A">
+                          <block type="variables_get" id="=q);-t~XgNdq%z1kcOK7">
+                            <field name="VAR">PWM_INC</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="t~8Blk}ItITJ#w]anfM+">
+                            <field name="NUM">2</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="DCMotorpwm_function4S" id="0H5~gKGIsm8pWjs|CWF=">
+                    <field name="DCMotorChannel">R2</field>
+                    <field name="DCMotorFunction">Forward</field>
+                    <value name="PWM">
+                      <block type="ops_arithmetic" id=":~{3RhFF.p-FHSCV)^FZ">
+                        <field name="OP">ADD</field>
+                        <value name="A">
+                          <block type="variables_get" id="g8kds+?*,XPH[eo4|+/M">
+                            <field name="VAR">PWM</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="ops_arithmetic" id="j%+*x6(n;C=ZZa/]}.~j">
+                            <field name="OP">BITWISE_RIGHT</field>
+                            <value name="A">
+                              <block type="variables_get" id="9r+R/@Yw~xR[o)zl2;P}">
+                                <field name="VAR">PWM_INC</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="K1%k|m%p??W.R9R]4!7#">
+                                <field name="NUM">2</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="DCMotorpwm_function4S" id="0ByjrSoSXp8q{5l+g|)g">
+                        <field name="DCMotorChannel">L1</field>
+                        <field name="DCMotorFunction">Reverse</field>
+                        <value name="PWM">
+                          <block type="ops_arithmetic" id=";4~|y(Q0ohQ/_Ya/{GW}">
+                            <field name="OP">ADD</field>
+                            <value name="A">
+                              <block type="variables_get" id="P4XIxo78yTJ1OtRbAfLa">
+                                <field name="VAR">PWM</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="ops_arithmetic" id="k)ViT+AQ5n6BXlDD/a]J">
+                                <field name="OP">BITWISE_RIGHT</field>
+                                <value name="A">
+                                  <block type="variables_get" id="|uqXA.[Pb/SA7iKPq}17">
+                                    <field name="VAR">PWM_INC</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="qGOm-TvQ3fotNxis~Bau">
+                                    <field name="NUM">2</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="DCMotorpwm_function4S" id="^)}@5BT~31y:::#1g#9S">
+                            <field name="DCMotorChannel">L2</field>
+                            <field name="DCMotorFunction">Reverse</field>
+                            <value name="PWM">
+                              <block type="ops_arithmetic" id="9mFmJE[Vn_#=YL9s^~Br">
+                                <field name="OP">ADD</field>
+                                <value name="A">
+                                  <block type="variables_get" id="`tHAiBO%kz`{]._fI00v">
+                                    <field name="VAR">PWM</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="ops_arithmetic" id="qwr#4`;[#b,~bza_(SoZ">
+                                    <field name="OP">BITWISE_RIGHT</field>
+                                    <value name="A">
+                                      <block type="variables_get" id="uF]B}k5BWKjy*Edv;.d/">
+                                        <field name="VAR">PWM_INC</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id="l7~vXz4B2#p:xIQ5Ym+Y">
+                                        <field name="NUM">2</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="procedures_callnoreturn" id="Hj7P,v#qvGypuw1)^M+9">
+                                <mutation name="fPWM_INC"></mutation>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="procedures_callnoreturn" id="LzyS;Kzy9V}Y`0ODxu:j">
+            <mutation name="CheckRXY"></mutation>
+            <next>
+              <block type="variables_set" id="^Tug2H,`;6S%-d?.5;!x">
+                <field name="VAR">PWM_INC</field>
+                <value name="VALUE">
+                  <block type="variables_set_type" id="@=B9ja/y{tBtp|YYlXeY">
+                    <field name="VARIABLE_SETTYPE_TYPE">BYTE</field>
+                    <value name="VARIABLE_SETTYPE_INPUT">
+                      <block type="math_number" id="0/(ChC)X:jeJ_a]PEQN.">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="o@(|/P/yx.Q}1vct)#vk" x="-70" y="1690">
+    <field name="NAME">fPWM_INC</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <statement name="STACK">
+      <block type="controls_if" id="jB|D_+9UC1m;ZQzPD.[K">
+        <value name="IF0">
+          <block type="logic_compare" id="_^8SqFZ^*Sd[LInWETPX">
+            <field name="OP">LTE</field>
+            <value name="A">
+              <block type="variables_get" id="uP8@0G?T,7GaW5RzvogD">
+                <field name="VAR">PWM_INC</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="xS{;W:47d2HApsg%kQOp">
+                <field name="NUM">200</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set" id="?@*{@#7mEMUK;NkM!eU-">
+            <field name="VAR">PWM_INC</field>
+            <value name="VALUE">
+              <block type="ops_arithmetic" id="3S~*rdKd,arAVQ*MCi*R">
+                <field name="OP">ADD</field>
+                <value name="A">
+                  <block type="variables_get" id="(r40LzLAo3F[qCOQx]xK">
+                    <field name="VAR">PWM_INC</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="RNu2XyefJ%uqPjc~%qiM">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>
