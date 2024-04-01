@@ -62,7 +62,7 @@ R、G、B LED的陽極連接330 歐姆的電阻，與ESP32 MCU模組的 IO27、I
 
 ## 完整的積木程式
 
-![alt text](images/image-31.png)
+![image](images/image-31.png)
 
 #### 儲存積木程式
 

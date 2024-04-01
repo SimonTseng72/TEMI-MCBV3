@@ -1,0 +1,76 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="xSM7a#*[6),_}n^MOd{y" x="150" y="130">
+    <statement name="SETUP_FUNC">
+      <block type="led_rgb_ra" id="C8k6CZbgW#4KGdSSX#F8">
+        <field name="PINR">27</field>
+        <value name="led_R">
+          <block type="math_number" id="OLabhJpP^A=;IhQ7ZOck">
+            <field name="NUM">100</field>
+          </block>
+        </value>
+        <next>
+          <block type="led_rgb_ga" id="3O|iMsR-JW6`Qn`b]0#m">
+            <field name="PING">26</field>
+            <value name="led_G">
+              <block type="math_number" id="~nA[=PmNQ,)S%+;#V]VG">
+                <field name="NUM">100</field>
+              </block>
+            </value>
+            <next>
+              <block type="led_rgb_ba" id="fLJNXeuj|Fr~HAy8/{.+">
+                <field name="PINB">32</field>
+                <value name="led_B">
+                  <block type="math_number" id="1.4[;Df,%Z}NZ]`c4D(m">
+                    <field name="NUM">100</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="LOOP_FUNC">
+      <block type="led_rgb_01a1" id="w:b:5%ZM[JrIy@|K3M/P">
+        <field name="ColorNAME">#ffcc00</field>
+        <next>
+          <block type="time_delay" id="(^xrbDaH4|lKyL1Ulin#">
+            <value name="DELAY_TIME_MILI">
+              <block type="math_number" id="`0.#u(1D5}],UNM0yS+G">
+                <field name="NUM">500</field>
+              </block>
+            </value>
+            <next>
+              <block type="led_rgb_01a1" id="%BMola}G{(p|;CN]*(3p">
+                <field name="ColorNAME">#3333ff</field>
+                <next>
+                  <block type="time_delay" id="lBzNW!lAC6nK]z;mJYkI">
+                    <value name="DELAY_TIME_MILI">
+                      <block type="math_number" id="qqV5SA9ERYf._j-xjsmx">
+                        <field name="NUM">500</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="led_rgb_01a1" id="2Z9?8CwPTnnM~a3N*X^_">
+                        <field name="ColorNAME">#993399</field>
+                        <next>
+                          <block type="time_delay" id="/vW:NLlF,xXNPY,iF5_`">
+                            <value name="DELAY_TIME_MILI">
+                              <block type="math_number" id="RGh:_=S0K=D1-Ap8Q}(n">
+                                <field name="NUM">500</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
